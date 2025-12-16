@@ -3,6 +3,7 @@ import { useEffect } from 'react';
 import Home from './components/Home';
 import Blog from './components/Blog';
 import Pago from './components/Pago';
+import Cookies from './components/Cookies';
 
 // Component to handle scroll to top on route change or hash scroll
 const ScrollToTop = () => {
@@ -32,6 +33,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/blog.html" element={<Blog />} />
         <Route path="/pago.html" element={<Pago />} />
+        <Route path="/cookies" element={<Cookies />} />
         {/* Redirect legacy URLs or just handle them as routes like above */}
       </Routes>
     </Router>
