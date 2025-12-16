@@ -1,53 +1,72 @@
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import Header from './Header';
+import Footer from './Footer';
+import './Cookies.css';
 
 const Cookies = () => {
-  // Scroll to top when component mounts
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
   return (
-    <div className="container" style={{ padding: '120px 20px 60px', maxWidth: '800px', margin: '0 auto' }}>
-      <h1>Política de Cookies</h1>
-      
-      <div className="content" style={{ marginTop: '30px', lineHeight: '1.6' }}>
-        <p>
-          En La Cura, valoramos tu privacidad y queremos ser transparentes sobre cómo utilizamos las tecnologías para mejorar tu experiencia en nuestro sitio web.
-        </p>
+    <>
+      <Header />
+      <main className="legal-page">
+        <section className="legal-header">
+          <div className="container">
+            <h1 className="legal-title">Política de Cookies</h1>
+          </div>
+        </section>
 
-        <h3 style={{ marginTop: '30px', marginBottom: '15px' }}>¿Qué son las cookies?</h3>
-        <p>
-          Las cookies son pequeños archivos de texto que los sitios web almacenan en tu dispositivo (ordenador, tablet o móvil) cuando los visitas. Son ampliamente utilizadas para que los sitios web funcionen de manera más eficiente, así como para proporcionar información a los propietarios del sitio.
-        </p>
+        <div className="container">
+          <div className="legal-content">
+            <div className="legal-text">
+              <p>
+                En <strong>La Cura</strong>, valoramos tu privacidad y queremos ser transparentes sobre cómo utilizamos las tecnologías para mejorar tu experiencia en nuestro sitio web. Esta política explica qué son las cookies, cómo las usamos y tus opciones para controlarlas.
+              </p>
 
-        <h3 style={{ marginTop: '30px', marginBottom: '15px' }}>¿Cómo utilizamos las cookies?</h3>
-        <p>
-          Utilizamos cookies para entender cómo interactúas con nuestro sitio web, personalizar tu experiencia y mejorar nuestros servicios. Específicamente, utilizamos cookies para:
-        </p>
-        <ul style={{ listStyleType: 'disc', paddingLeft: '20px', marginTop: '10px' }}>
-          <li>Recordar tus preferencias y configuraciones.</li>
-          <li>Analizar el tráfico y el comportamiento de los usuarios en el sitio para mejorar su rendimiento.</li>
-          <li>Facilitar la navegación y el acceso a áreas seguras del sitio.</li>
-        </ul>
+              <h3>¿Qué son las cookies?</h3>
+              <p>
+                Las cookies son pequeños archivos de texto que los sitios web almacenan en tu dispositivo (ordenador, tablet o móvil) cuando los visitas. Son ampliamente utilizadas para que los sitios web funcionen de manera más eficiente, así como para proporcionar información analítica a los propietarios del sitio. No dañan tu dispositivo y nos ayudan a ofrecerte una mejor experiencia de usuario.
+              </p>
 
-        <h3 style={{ marginTop: '30px', marginBottom: '15px' }}>Control de cookies</h3>
-        <p>
-          Puedes controlar y/o eliminar las cookies según desees. Puedes borrar todas las cookies que ya están en tu ordenador y puedes configurar la mayoría de los navegadores para evitar que se coloquen. Sin embargo, si haces esto, es posible que tengas que ajustar manualmente algunas preferencias cada vez que visites un sitio y que algunos servicios y funcionalidades no funcionen.
-        </p>
+              <h3>¿Cómo utilizamos las cookies?</h3>
+              <p>
+                Utilizamos cookies de primera parte y de terceros por varias razones técnicas. Algunas cookies son necesarias por razones técnicas para que nuestro sitio web funcione, y nos referimos a ellas como cookies "esenciales". Otras cookies también nos permiten rastrear y dirigir los intereses de nuestros usuarios para mejorar la experiencia en nuestras propiedades en línea.
+              </p>
+              <p>Específicamente, utilizamos cookies para:</p>
+              <ul>
+                <li><strong>Esenciales:</strong> Permitir la navegación y el acceso a áreas seguras del sitio.</li>
+                <li><strong>Preferencias:</strong> Recordar tus configuraciones y preferencias (como idioma o región).</li>
+                <li><strong>Analíticas:</strong> Analizar el tráfico y el comportamiento de los usuarios en el sitio para mejorar su rendimiento y contenido.</li>
+                <li><strong>Marketing:</strong> Mostrar anuncios relevantes (si aplica en el futuro).</li>
+              </ul>
 
-        <h3 style={{ marginTop: '30px', marginBottom: '15px' }}>Más información</h3>
-        <p>
-          Si tienes alguna pregunta sobre nuestra política de cookies, no dudes en <Link to="/#contacto" style={{ color: 'inherit', textDecoration: 'underline' }}>contactarnos</Link>.
-        </p>
-      </div>
+              <h3>Control de cookies</h3>
+              <p>
+                Tienes el derecho a decidir si aceptas o rechazas las cookies. Puedes configurar o modificar los controles de tu navegador web para aceptar o rechazar cookies. Si eliges rechazar las cookies, puedes seguir utilizando nuestro sitio web, aunque tu acceso a algunas funcionalidades y áreas de nuestro sitio web puede estar restringido.
+              </p>
+              <p>
+                Para más detalles sobre cómo controlar las cookies, visita la configuración de tu navegador (Chrome, Firefox, Safari, Edge, etc.).
+              </p>
 
-      <div style={{ marginTop: '50px', textAlign: 'center' }}>
-        <Link to="/" className="btn btn-primary" style={{ display: 'inline-block', padding: '10px 20px', borderRadius: '30px', background: 'var(--primary-color, #333)', color: '#fff', textDecoration: 'none' }}>
-          Volver al Inicio
-        </Link>
-      </div>
-    </div>
+              <h3>Más información</h3>
+              <p>
+                Si tienes alguna pregunta sobre nuestra política de cookies, no dudes en <Link to="/#contacto" className="legal-link">contactarnos</Link>.
+              </p>
+            </div>
+
+            <div className="legal-action">
+              <Link to="/" className="btn-back">
+                <span>← Volver al Inicio</span>
+              </Link>
+            </div>
+          </div>
+        </div>
+      </main>
+      <Footer />
+    </>
   );
 };
 
