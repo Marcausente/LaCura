@@ -31,8 +31,8 @@ const Contacto = () => {
             <div className="container">
                 <div className="contacto-content">
                     <div className="contacto-info">
-                        <h2>¿Listo para el desafío?</h2>
-                        <p>Si eres intrépido y buscas la autenticidad, estamos aquí para acompañarte en tu viaje. Contáctanos y te responderemos en menos de 24 horas.</p>
+                        <h2>¿Tienes alguna duda?</h2>
+                        <p>Si tienes preguntas sobre el proyecto o necesitas más información, estamos aquí para ayudarte. Escríbenos y te responderemos lo antes posible.</p>
                         <div className="contacto-methods">
                             <div className="contacto-method">
                                 <div className="method-icon">📧</div>
