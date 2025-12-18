@@ -32,7 +32,7 @@ const Footer = () => {
                         <div className="footer-column">
                             <h4>Legal</h4>
                             <ul>
-                                <li><a href="#">Términos y Condiciones</a></li>
+                                <li><a href="/terminos-condiciones">Términos y Condiciones</a></li>
                                 <li><a href="/politica-privacidad">Política de Privacidad</a></li>
                                 <li><a href="/cookies">Cookies</a></li>
                                 <li><a href="/aviso-legal">Aviso Legal</a></li>
