@@ -4,6 +4,7 @@ import Home from './components/Home';
 import Blog from './components/Blog';
 import Pago from './components/Pago';
 import Cookies from './components/Cookies';
+import Legal from './components/AvisoLegal';
 
 import PoliticaPrivacidad from './components/PoliticaPrivacidad';
 
@@ -36,6 +37,7 @@ function App() {
         <Route path="/blog.html" element={<Blog />} />
         <Route path="/pago.html" element={<Pago />} />
         <Route path="/cookies" element={<Cookies />} />
+        <Route path="/aviso-legal" element={<Legal />} />
         <Route path="/politica-privacidad" element={<PoliticaPrivacidad />} />
         {/* Redirect legacy URLs or just handle them as routes like above */}
       </Routes>
