@@ -1,15 +1,27 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext';
 import './Pago.css';
 import Header from './Header';
 import Footer from './Footer';
 
 const Pago = () => {
+    const { user, loading } = useAuth();
+    const navigate = useNavigate();
     const [paymentMethod, setPaymentMethod] = useState('card');
     const [processing, setProcessing] = useState(false);
     const [formData, setFormData] = useState({
         cardNumber: '',
         expiry: ''
     });
+
+    useEffect(() => {
+        if (!loading && !user) {
+            navigate('/');
+        }
+    }, [user, loading, navigate]);
+
+    if (loading) return <div>Cargando...</div>;
 
     const handleCardInput = (e) => {
         let value = e.target.value.replace(/\s/g, '');
