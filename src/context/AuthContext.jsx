@@ -35,6 +35,10 @@ export const AuthProvider = ({ children }) => {
             password,
         });
         if (error) throw error;
+        if (data.session) {
+            setUser(data.session.user);
+            setLoading(false);
+        }
         return data;
     };
 
@@ -47,6 +51,10 @@ export const AuthProvider = ({ children }) => {
             },
         });
         if (error) throw error;
+        if (data.session) {
+            setUser(data.session.user);
+            setLoading(false);
+        }
         return data;
     };
 

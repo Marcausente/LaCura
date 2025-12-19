@@ -102,8 +102,8 @@
     padding: 1rem 1.2rem;
     border-radius: 12px;
     border: 1px solid rgba(255, 255, 255, 0.1);
-    background: rgba(0, 0, 0, 0.4); /* Darker background for contrast */
-    color: #ffffff;
+    background: rgba(255, 255, 255, 0.9); /* Light background */
+    color: #333333; /* Grayish text */
     font-size: 1rem;
     transition: all 0.2s ease;
 }
@@ -111,9 +111,18 @@
 .form-group input:focus {
     outline: none;
     border-color: var(--primary-color);
-    background: rgba(0, 0, 0, 0.6); /* Even darker on focus to keep contrast */
-    color: #ffffff; /* Keep text white */
+    background: #ffffff; /* White on focus */
+    color: #000000; /* Black text */
     box-shadow: 0 0 20px rgba(231, 78, 111, 0.15); /* Soft glow */
+}
+
+/* Fix for autofill background */
+.form-group input:-webkit-autofill,
+.form-group input:-webkit-autofill:hover, 
+.form-group input:-webkit-autofill:focus {
+    -webkit-text-fill-color: #333333;
+    -webkit-box-shadow: 0 0 0px 1000px #ffffff inset;
+    transition: background-color 5000s ease-in-out 0s;
 }
 
 .auth-submit-btn {
