@@ -67,7 +67,7 @@ const CompletarPerfil = () => {
             const profileData = {
                 nombre: formData.nombre,
                 apellidos: formData.apellidos,
-                fechaNacimiento: formData.fechaNacimiento,
+                fecha_nacimiento: formData.fechaNacimiento,
                 ...(avatarUrl && { avatar_url: avatarUrl })
             };
 

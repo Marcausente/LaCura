@@ -6,6 +6,7 @@ create table profiles (
   apellidos text,
   fecha_nacimiento date,
   avatar_url text,
+  rol text default 'Gratuito' check (rol in ('Gratuito', 'Premium', 'Administrador', 'Superadministrador')),
 
   constraint username_length check (char_length(nombre) >= 3)
 );
