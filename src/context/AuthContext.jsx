@@ -56,10 +56,24 @@ export const AuthProvider = ({ children }) => {
     };
 
     const updateProfile = async (data) => {
-        const { error } = await supabase.auth.updateUser({
+        // 1. Update auth metadata (useful for session info)
+        const { error: authError } = await supabase.auth.updateUser({
             data: data
         });
-        if (error) throw error;
+        if (authError) throw authError;
+
+        // 2. Update public profiles table
+        if (user) {
+            const { error: profileError } = await supabase
+                .from('profiles')
+                .upsert({
+                    id: user.id,
+                    updated_at: new Date(),
+                    ...data
+                });
+
+            if (profileError) throw profileError;
+        }
     };
 
     const value = {
