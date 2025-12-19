@@ -1,5 +1,6 @@
 import ReactDOM from 'react-dom';
 import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import './AuthModal.css';
 
@@ -11,6 +12,7 @@ const AuthModal = ({ isOpen, onClose, onSuccess }) => {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState('');
     const { login, register } = useAuth();
+    const navigate = useNavigate();
 
     // Prevent scrolling when modal is open
     useEffect(() => {
@@ -34,13 +36,14 @@ const AuthModal = ({ isOpen, onClose, onSuccess }) => {
         try {
             if (isLogin) {
                 await login(email, password);
+                onSuccess(); // Navigate to /pago.html (handled by parent)
             } else {
                 if (password !== confirmPassword) {
                     throw new Error("Las contraseñas no coinciden.");
                 }
                 await register(email, password);
+                navigate('/completar-perfil'); // Navigate to profile completion
             }
-            onSuccess();
             onClose();
         } catch (err) {
             setError(err.message || 'Ha ocurrido un error. Por favor intenta de nuevo.');
