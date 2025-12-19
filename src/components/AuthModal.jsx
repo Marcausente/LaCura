@@ -6,6 +6,7 @@ const AuthModal = ({ isOpen, onClose, onSuccess }) => {
     const [isLogin, setIsLogin] = useState(true);
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [confirmPassword, setConfirmPassword] = useState(''); // New state
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState('');
     const { login, register } = useAuth();
@@ -21,6 +22,9 @@ const AuthModal = ({ isOpen, onClose, onSuccess }) => {
             if (isLogin) {
                 await login(email, password);
             } else {
+                if (password !== confirmPassword) {
+                    throw new Error("Las contraseñas no coinciden.");
+                }
                 await register(email, password);
             }
             onSuccess();
@@ -77,6 +81,20 @@ const AuthModal = ({ isOpen, onClose, onSuccess }) => {
                             minLength={6}
                         />
                     </div>
+
+                    {!isLogin && (
+                        <div className="form-group fade-in">
+                            <label>Confirmar Contraseña</label>
+                            <input 
+                                type="password" 
+                                value={confirmPassword}
+                                onChange={(e) => setConfirmPassword(e.target.value)}
+                                required
+                                placeholder="******"
+                                minLength={6}
+                            />
+                        </div>
+                    )}
 
                     <button type="submit" className="auth-submit-btn" disabled={loading}>
                         {loading 
