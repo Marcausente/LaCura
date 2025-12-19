@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import ReactDOM from 'react-dom';
+import { useState, useEffect } from 'react';
 import { useAuth } from '../context/AuthContext';
 import './AuthModal.css';
 
@@ -6,10 +7,22 @@ const AuthModal = ({ isOpen, onClose, onSuccess }) => {
     const [isLogin, setIsLogin] = useState(true);
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [confirmPassword, setConfirmPassword] = useState(''); // New state
+    const [confirmPassword, setConfirmPassword] = useState('');
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState('');
     const { login, register } = useAuth();
+
+    // Prevent scrolling when modal is open
+    useEffect(() => {
+        if (isOpen) {
+            document.body.style.overflow = 'hidden';
+        } else {
+            document.body.style.overflow = 'unset';
+        }
+        return () => {
+            document.body.style.overflow = 'unset';
+        };
+    }, [isOpen]);
 
     if (!isOpen) return null;
 
@@ -36,7 +49,7 @@ const AuthModal = ({ isOpen, onClose, onSuccess }) => {
         }
     };
 
-    return (
+    return ReactDOM.createPortal(
         <div className="auth-modal-overlay" onClick={onClose}>
             <div className="auth-modal" onClick={e => e.stopPropagation()}>
                 <button className="auth-modal-close" onClick={onClose}>&times;</button>
@@ -104,7 +117,8 @@ const AuthModal = ({ isOpen, onClose, onSuccess }) => {
                     </button>
                 </form>
             </div>
-        </div>
+        </div>,
+        document.body
     );
 };
 
