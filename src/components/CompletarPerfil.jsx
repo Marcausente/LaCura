@@ -11,7 +11,8 @@ const CompletarPerfil = () => {
     const navigate = useNavigate();
     const [formData, setFormData] = useState({
         nombre: '',
-        apellidos: '',
+        apellido1: '',
+        apellido2: '',
         fechaNacimiento: ''
     });
     const [avatarFile, setAvatarFile] = useState(null);
@@ -66,7 +67,8 @@ const CompletarPerfil = () => {
 
             const profileData = {
                 nombre: formData.nombre,
-                apellidos: formData.apellidos,
+                apellido1: formData.apellido1,
+                apellido2: formData.apellido2,
                 fecha_nacimiento: formData.fechaNacimiento,
                 ...(avatarUrl && { avatar_url: avatarUrl })
             };
@@ -140,13 +142,23 @@ const CompletarPerfil = () => {
                             </div>
 
                             <div className="form-group">
-                                <label>Apellidos</label>
+                                <label>Primer Apellido</label>
                                 <input 
                                     type="text" 
-                                    value={formData.apellidos}
-                                    onChange={(e) => setFormData({...formData, apellidos: e.target.value})}
+                                    value={formData.apellido1}
+                                    onChange={(e) => setFormData({...formData, apellido1: e.target.value})}
                                     required
-                                    placeholder="Tus apellidos"
+                                    placeholder="Tu primer apellido"
+                                />
+                            </div>
+                            <div className="form-group">
+                                <label>Segundo Apellido</label>
+                                <input 
+                                    type="text" 
+                                    value={formData.apellido2}
+                                    onChange={(e) => setFormData({...formData, apellido2: e.target.value})}
+                                    required
+                                    placeholder="Tus segundo apellido"
                                 />
                             </div>
                         </div>
