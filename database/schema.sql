@@ -3,9 +3,11 @@ create table if not exists profiles (
   id uuid references auth.users not null primary key,
   updated_at timestamp with time zone,
   nombre text,
-  apellidos text,
+  apellido1 text,
+  apellido2 text,
   fecha_nacimiento date,
   avatar_url text,
+  verified boolean not null default false,
   constraint username_length check (char_length(nombre) >= 3)
 );
 
@@ -57,3 +59,25 @@ create policy "Anyone can update their own avatar."
   on storage.objects for update
   using ( auth.uid() = owner )
   with check ( bucket_id = 'avatars' );
+
+-- Function to handle new user registration
+drop function if exists public.handle_new_user() cascade;
+create or replace function public.handle_new_user()
+returns trigger as $$
+begin
+  insert into public.profiles (id, updated_at, rol, verified)
+  values (new.id, now(), 'Gratuito', false);
+  return new;
+exception
+  when others then
+    -- Log error but don't fail the user creation
+    raise warning 'Error creating profile for user %: %', new.id, sqlerrm;
+    return new;
+end;
+$$ language plpgsql security definer;
+
+-- Trigger for new user registration
+drop trigger if exists on_auth_user_created on auth.users;
+create trigger on_auth_user_created
+  after insert on auth.users
+  for each row execute function public.handle_new_user();
