@@ -9,6 +9,8 @@ import Terminos from './components/TerminosCondiciones';
 
 import PoliticaPrivacidad from './components/PoliticaPrivacidad';
 import CompletarPerfil from './components/CompletarPerfil';
+import VerificarEmail from './components/VerificarEmail';
+import VerificacionPendiente from './components/VerificacionPendiente';
 
 // Component to handle scroll to top on route change or hash scroll
 const ScrollToTop = () => {
@@ -43,6 +45,8 @@ function App() {
         <Route path="/terminos-condiciones" element={<Terminos />} />
         <Route path="/politica-privacidad" element={<PoliticaPrivacidad />} />
         <Route path="/completar-perfil" element={<CompletarPerfil />} />
+        <Route path="/verificar-email" element={<VerificarEmail />} />
+        <Route path="/verificacion-pendiente" element={<VerificacionPendiente />} />
         {/* Redirect legacy URLs or just handle them as routes like above */}
       </Routes>
     </Router>

@@ -42,7 +42,7 @@ const AuthModal = ({ isOpen, onClose, onSuccess }) => {
                     throw new Error("Las contraseñas no coinciden.");
                 }
                 await register(email, password);
-                navigate('/completar-perfil'); // Navigate to profile completion
+                navigate('/verificacion-pendiente'); // Navigate to verification pending page
             }
             onClose();
         } catch (err) {

@@ -24,7 +24,30 @@ const CompletarPerfil = () => {
     useEffect(() => {
         if (!loading && !user) {
             navigate('/');
+            return;
         }
+        
+        // Check if user is verified
+        const checkVerification = async () => {
+            if (user) {
+                const { data, error } = await supabase
+                    .from('profiles')
+                    .select('verified')
+                    .eq('id', user.id)
+                    .single();
+                
+                if (error) {
+                    console.error('Error checking verification:', error);
+                    return;
+                }
+                
+                if (data && !data.verified) {
+                    navigate('/verificacion-pendiente');
+                }
+            }
+        };
+        
+        checkVerification();
     }, [user, loading, navigate]);
 
     const handleImageChange = (e) => {

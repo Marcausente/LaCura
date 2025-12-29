@@ -51,6 +51,26 @@ export const AuthProvider = ({ children }) => {
             },
         });
         if (error) throw error;
+        
+        // Generate verification token after successful registration
+        if (data.user) {
+            try {
+                const { data: tokenData, error: tokenError } = await supabase
+                    .rpc('generate_verification_token', { user_id: data.user.id });
+                
+                if (tokenError) {
+                    console.error('Error generating verification token:', tokenError);
+                }
+                
+                // In production, here you would send an email with the token
+                // The token would be: tokenData
+                // Email would contain a link like: https://yourdomain.com/verificar-email?token=${tokenData}
+                console.log('Verification token generated:', tokenData);
+            } catch (err) {
+                console.error('Error in token generation process:', err);
+            }
+        }
+        
         if (data.session) {
             setUser(data.session.user);
             setLoading(false);
