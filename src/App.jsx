@@ -6,9 +6,10 @@ import Pago from './components/Pago';
 import Cookies from './components/Cookies';
 import Legal from './components/AvisoLegal';
 import Terminos from './components/TerminosCondiciones';
-
 import PoliticaPrivacidad from './components/PoliticaPrivacidad';
 import CompletarPerfil from './components/CompletarPerfil';
+import VerificarEmail from './components/VerificarEmail';
+import EmailVerificationBanner from './components/EmailVerificationBanner';
 
 // Component to handle scroll to top on route change or hash scroll
 const ScrollToTop = () => {
@@ -34,6 +35,7 @@ function App() {
   return (
     <Router>
       <ScrollToTop />
+      <EmailVerificationBanner />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/blog.html" element={<Blog />} />
@@ -43,6 +45,7 @@ function App() {
         <Route path="/terminos-condiciones" element={<Terminos />} />
         <Route path="/politica-privacidad" element={<PoliticaPrivacidad />} />
         <Route path="/completar-perfil" element={<CompletarPerfil />} />
+        <Route path="/verificar-email" element={<VerificarEmail />} />
         {/* Redirect legacy URLs or just handle them as routes like above */}
       </Routes>
     </Router>

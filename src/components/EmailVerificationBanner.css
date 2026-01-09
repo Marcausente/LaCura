@@ -1,0 +1,124 @@
+.email-verification-banner {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 1rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    position: sticky;
+    top: 0;
+    z-index: 999;
+    animation: slideDown 0.3s ease-out;
+}
+
+@keyframes slideDown {
+    from {
+        transform: translateY(-100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.banner-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.banner-icon {
+    font-size: 2rem;
+    flex-shrink: 0;
+}
+
+.banner-text {
+    flex: 1;
+    min-width: 250px;
+}
+
+.banner-text strong {
+    display: block;
+    font-size: 1.1rem;
+    margin-bottom: 0.25rem;
+}
+
+.banner-text p {
+    margin: 0;
+    font-size: 0.9rem;
+    opacity: 0.95;
+}
+
+.resend-button {
+    background-color: rgba(255, 255, 255, 0.2);
+    border: 2px solid white;
+    color: white;
+    padding: 0.6rem 1.5rem;
+    border-radius: 25px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+}
+
+.resend-button:hover:not(:disabled) {
+    background-color: white;
+    color: #667eea;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.resend-button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.banner-message {
+    width: 100%;
+    margin-top: 0.75rem;
+    padding: 0.75rem;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    text-align: center;
+}
+
+.banner-message.success {
+    background-color: rgba(72, 187, 120, 0.3);
+    border: 1px solid rgba(72, 187, 120, 0.5);
+}
+
+.banner-message.error {
+    background-color: rgba(245, 101, 101, 0.3);
+    border: 1px solid rgba(245, 101, 101, 0.5);
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .email-verification-banner {
+        padding: 1rem 0.75rem;
+    }
+
+    .banner-content {
+        justify-content: center;
+        text-align: center;
+    }
+
+    .banner-icon {
+        font-size: 1.5rem;
+        width: 100%;
+        text-align: center;
+    }
+
+    .banner-text {
+        width: 100%;
+        text-align: center;
+    }
+
+    .resend-button {
+        width: 100%;
+        margin-top: 0.5rem;
+    }
+}

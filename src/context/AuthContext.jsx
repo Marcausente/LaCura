@@ -1,5 +1,6 @@
 import { createContext, useContext, useState, useEffect } from 'react';
 import { supabase } from '../supabaseClient';
+import { API_ENDPOINTS } from '../config/api';
 
 const AuthContext = createContext();
 
@@ -51,6 +52,43 @@ export const AuthProvider = ({ children }) => {
             },
         });
         if (error) throw error;
+        
+        // Create profile with verified set to false
+        if (data.user) {
+            const { error: profileError } = await supabase
+                .from('profiles')
+                .insert({
+                    id: data.user.id,
+                    updated_at: new Date(),
+                    verified: false,
+                    ...metadata
+                });
+
+            if (profileError && profileError.code !== '23505') { // Ignore duplicate key errors
+                console.error('Profile creation error:', profileError);
+            }
+
+            // Send verification email
+            try {
+                const response = await fetch(API_ENDPOINTS.sendVerificationEmail, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        userId: data.user.id,
+                        email: email,
+                    }),
+                });
+
+                if (!response.ok) {
+                    console.error('Failed to send verification email');
+                }
+            } catch (emailError) {
+                console.error('Error sending verification email:', emailError);
+            }
+        }
+        
         if (data.session) {
             setUser(data.session.user);
             setLoading(false);

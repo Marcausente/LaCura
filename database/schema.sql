@@ -6,6 +6,7 @@ create table if not exists profiles (
   apellidos text,
   fecha_nacimiento date,
   avatar_url text,
+  verified boolean default false,
   constraint username_length check (char_length(nombre) >= 3)
 );
 
@@ -16,6 +17,33 @@ begin
         alter table profiles add column rol text default 'Gratuito' check (rol in ('Gratuito', 'Premium', 'Administrador', 'Superadministrador'));
     end if;
 end $$;
+
+-- Add 'verified' column if it doesn't exist
+do $$
+begin
+    if not exists (select 1 from information_schema.columns where table_name = 'profiles' and column_name = 'verified') then
+        alter table profiles add column verified boolean default false;
+    end if;
+end $$;
+
+-- Create email_verification table for verification tokens
+create table if not exists email_verification (
+  id uuid default gen_random_uuid() primary key,
+  profile_id uuid references profiles(id) on delete cascade not null,
+  token text not null unique,
+  expires_at timestamptz not null,
+  created_at timestamptz default now()
+);
+
+-- Enable RLS on email_verification
+alter table email_verification enable row level security;
+
+-- Policy for email_verification (only accessible by backend functions)
+drop policy if exists "Service role can manage email verifications." on email_verification;
+create policy "Service role can manage email verifications."
+  on email_verification for all
+  using (true)
+  with check (true);
 
 -- Enable RLS
 alter table profiles enable row level security;
